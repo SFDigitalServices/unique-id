@@ -24,11 +24,15 @@ prereqs_dir() {
 
 has() {
     local tool=$1
+    local instructions=$2
     if [[ -n $(type -p "${tool}") ]]; then
         echo "${tool} exists."
         return 0
     else
         echo "WARNING: ${tool} not found."
+        if [[ -n "${instructions}" ]]; then
+            echo "  install with: ${instructions}"
+        fi
         prereqs_found=false
         return 1
     fi
